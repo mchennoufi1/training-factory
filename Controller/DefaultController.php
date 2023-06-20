@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Security;
 
 class DefaultController extends AbstractController
 {
@@ -53,28 +54,24 @@ class DefaultController extends AbstractController
             $email = $request->request->get('email');
             $password = $request->request->get('password');
             
-            // Check if email and password are provided
             if (!$email || !$password) {
-                // Handle validation error
+
                 return new Response('Please provide both email and password.');
             }
             
-            // Encrypt the password
             $encodedPassword = $this->passwordEncoder->encodePassword(new User(), $password);
             
-            // Save the user to the database (assuming you have a UserRepository)
             $userRepository = $this->getDoctrine()->getRepository(User::class);
             
             $user = new User();
             $user->setEmail($email);
             $user->setPassword($encodedPassword);
-            $user->setRoles(['ROLE_KLANT']); // Set the user role as "klant"
+            $user->setRoles(['ROLE_KLANT']); 
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             
-            // Redirect the user to the home page
             return $this->redirectToRoute('app_default');
         }
         

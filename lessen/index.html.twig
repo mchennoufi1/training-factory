@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lessen</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Tijd</th>
+                <th>Locatie</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for les in lessen %}
+                <tr>
+                    <td>{{ les.date }}</td>
+                    <td>{{ les.time }}</td>
+                    <td>{{ les.location }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

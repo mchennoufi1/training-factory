@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Beheer Trainingsvormen</h1>
+
+    <h2>Trainingsvormen</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Naam</th>
+                <th>Beschrijving</th>
+                <th>Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for training in trainings %}
+                <tr>
+                    <td>{{ training.id }}</td>
+                    <td>{{ training.name }}</td>
+                    <td>{{ training.description }}</td>
+                    <td>
+                        <a href="{{ path('admin_training_edit', {'id': training.id}) }}">Wijzigen</a>
+                        <a href="{{ path('admin_training_delete', {'id': training.id}) }}">Verwijderen</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ form_start(form) }}
+        {{ form_widget(form.name) }}
+        {{ form_widget(form.description) }}
+        <button type="submit">Save</button>
+    {{ form_end(form) }}
+
+
+    <h2>Uitloggen</h2>
+
+    <ul>
+        <li>Your logout at <code><a href="{{ path('logout') }}">uitloggen</a></code></li>
+    </ul>
+{% endblock %}

@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Instructeurs toevoegen</h1>
+
+    {# Formulier voor het toevoegen van een instructeur #}
+    <form method="POST" action="{{ path('admin_instructeur_add') }}">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Toevoegen</button>
+        {{ form_end(form) }}
+    </form>
 
     <h2>Gebruikers</h2>
 
@@ -21,20 +29,11 @@
                     <td>{{ user.email }}</td>
                     <td>
                         <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Wijzigen</a>
-                        <a href="{{ path('admin_user_delete', {'id': user.id}) }}">Verwijderen</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    <h2>Beheer Instructeurs</h2>
-    <p><a href="{{ path('admin_instructeurs') }}">Verander instructeurs</a></p>
-
-    <h2>Beheer Trainingsvormen</h2>
-    <p><a href="{{ path('admin_training_add') }}">Toevoegen</a></p>
-
-
 
     <h2>Uitloggen</h2>
 
